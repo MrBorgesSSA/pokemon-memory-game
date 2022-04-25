@@ -1,40 +1,8 @@
 <template>
   <div id="app">
-    <div class="card">
-      <img src="./assets/images/pokemon-logo.png">
-    </div>
-    <div class="card">
-      <img src="./assets/images/pokemon-logo.png">
-    </div>
-    <div class="card">
-      <img src="./assets/images/pokemon-logo.png">
-    </div>
-    <div class="card fliped">
-      <img src="./assets/images/pokemon/7.png">
-    </div>
-    <div class="card">
-      <img src="./assets/images/pokemon-logo.png">
-    </div>
-    <div class="card">
-      <img src="./assets/images/pokemon-logo.png">
-    </div>
-    <div class="card fliped">
-      <img src="./assets/images/pokemon/4.png">
-    </div>
-    <div class="card">
-      <img src="./assets/images/pokemon-logo.png">
-    </div>
-    <div class="card">
-      <img src="./assets/images/pokemon-logo.png">
-    </div>
-    <div class="card">
-      <img src="./assets/images/pokemon-logo.png">
-    </div>
-    <div class="card">
-      <img src="./assets/images/pokemon-logo.png">
-    </div>
-    <div class="card">
-      <img src="./assets/images/pokemon-logo.png">
+    <div class="card" @click="card.fliped = !card.fliped" :class="{'fliped' : card.fliped}" v-for="(card, index) in cards" v-bind:key="index">
+      <img v-if="card.fliped" :src="card.sprite" />
+      <img v-else src="./assets/images/pokemon-logo.png" />
     </div>
   </div>
 </template>
@@ -42,7 +10,49 @@
 <script>
 
 export default {
-  name: 'App'
+  name: 'App',
+
+  data(){
+    return  {
+      cards: []
+    }
+  },
+
+  methods: {
+
+    shuffle(array) {
+      let currentIndex = array.length,  randomIndex;
+
+      // While there remain elements to shuffle.
+      while (currentIndex != 0) {
+
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+          array[randomIndex], array[currentIndex]];
+      }
+    }
+  },
+
+  mounted(){
+    let number
+    let card = null
+
+    for(let cardIndex = 0; cardIndex < 16; cardIndex++){
+      number = Math.floor(Math.random() * 898) + 1
+      card = {
+        id: number,
+        sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${number}.png`,
+        fliped: false
+      }
+      this.cards.push(card)
+      this.cards.push({ ...card })
+    }
+    this.shuffle( this.cards )
+  }
 }
 </script>
 
@@ -59,12 +69,12 @@ html{
 }
 body{
   height: 100%;
-  background-image: linear-gradient( #13547a 50%, #80d0c7);
+  background-image: linear-gradient( to right bottom, #13547a 50%, #80d0c7);
 }
 
 .card{
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
   border: 8px solid #FDCB09;
   background-image: url('~@/assets/images/card-background.jpg');
   background-size: cover;
