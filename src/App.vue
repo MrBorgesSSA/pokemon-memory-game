@@ -40,9 +40,11 @@ export default {
   mounted(){
     let number
     let card = null
-
+    let image
     for(let cardIndex = 0; cardIndex < 16; cardIndex++){
       number = Math.floor(Math.random() * 898) + 1
+      image = new Image();
+      image.src = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${number}.png`
       card = {
         id: number,
         sprite: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${number}.png`,
