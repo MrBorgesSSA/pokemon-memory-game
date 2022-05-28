@@ -20,7 +20,6 @@
 
     methods:{
       flipCard(){
-        this.card.fliped = ! this.card.fliped
         this.$emit('flip-card', this.card)
       }
     }
