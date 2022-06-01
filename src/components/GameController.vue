@@ -56,6 +56,7 @@
         flipCardSnd: null,
         gameSnd: null,
         victorySnd: null,
+        cliqueSnd: null,
         timeInterval: null,
         showModal: true,
         modalTitle: "Parabéns, você conseguiu!",
@@ -79,6 +80,7 @@
       async closeModal(){
         this.victorySnd.currentTime = 0
         this.victorySnd.pause()
+        this.cliqueButton()
         this.$modal.hide('dialog')
       },
 
@@ -184,6 +186,13 @@
 
         this.victorySnd = new Audio(require("../../src/assets/sounds/PokemonVictory.mp3"))
         this.victorySnd.volume = 0.3
+
+        this.cliqueSnd = new Audio(require("../../src/assets/sounds/clique.mp3"))
+      },
+
+      async cliqueButton(){
+        this.cliqueSnd.currentTime = 0
+        this.cliqueSnd.play()
       },
 
       async sortCards(){
@@ -205,6 +214,15 @@
             fliped: false,
             matched: false
           }
+
+          var element = this.cards.find( (x) => {
+            return x.id == carta.id
+          });
+
+          if(element != null){
+            cardIndex--
+            continue
+          } 
           
           this.cards.push(carta)
           this.cards.push({ ...carta })
@@ -231,6 +249,8 @@
 
         this.gameSnd.pause()
         this.gameSnd.currentTime = 0
+        
+        this.cliqueButton()
 
         this.sortCards()
         this.$modal.hide('dialog')
