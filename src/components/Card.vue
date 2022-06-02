@@ -29,7 +29,7 @@
 
 .flip-card {
   background-color: transparent;
-  width: 100px;
+  width: 8.2vw;
   height: 100px;
   margin: 33px 0 0 45px;
   display: block;
