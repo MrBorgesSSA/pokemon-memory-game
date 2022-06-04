@@ -249,6 +249,9 @@
 
         this.gameSnd.pause()
         this.gameSnd.currentTime = 0
+
+        this.victorySnd.currentTime = 0
+        this.victorySnd.pause()
         
         this.cliqueButton()
 
