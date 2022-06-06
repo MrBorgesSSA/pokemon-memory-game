@@ -24,4 +24,4 @@ npm run lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### Demo online
-You can test it [here](https://pokemonmemory-game.herokuapp.com/)  
+Try [The Pokemon Memory Game](https://pokemonmemory-game.herokuapp.com/)  
